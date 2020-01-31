@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import PrivateRoute from "./Utilities/loginProtectedRoute";
+import SignIn from "./Components/LoginForm";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <div className="App">
         <nav>
           <ul>
+            <SignIn />
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
