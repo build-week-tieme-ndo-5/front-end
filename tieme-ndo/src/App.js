@@ -28,8 +28,8 @@ function App() {
           </ul>
         </nav>
         <Switch>
-          <Route path="/login" />
-          <PrivateRoute path="/dashboard" />
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
           <Route exact path="/" />
         </Switch>
       </div>
