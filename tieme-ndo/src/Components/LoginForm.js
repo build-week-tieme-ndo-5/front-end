@@ -1,63 +1,65 @@
-import React, { useState } from 'react';
-import { axiosWithAuth } from '../Utilities/axiosWithAuth';
+import React, { useState } from "react";
+import { axiosWithAuth } from "../Utilities/axiosWithAuth";
 
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
 export default function SignIn({ history }) {
   const classes = useStyles();
 
-  const [ credentials, setCredentials ] = useState({username:'', password:''});
-  const [ isLoading, setIsLoading ] = useState('');
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: ""
+  });
+  const [isLoading, setIsLoading] = useState("");
 
-  const onLogin = (event) => {
+  const onLogin = event => {
     event.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
 
     axiosWithAuth()
-      .put(`http://localhost:4000/staff/login`, credentials)
+      .put(`http://localhost:6000/staff/login`, credentials)
       .then(response => {
         console.log(response);
-        localStorage.setItem('token', response.data.payload);
-        history.push('/dashboard')
+        localStorage.setItem("token", response.data.payload);
+        history.push("/dashboard");
       })
-      .catch(error => console.log('Error > ', error))
-  }
+      .catch(error => console.log("Error > ", error));
+  };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     event.preventDefault();
-    setCredentials({...credentials, [event.target.name]: event.target.value})
-  }
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -66,7 +68,7 @@ export default function SignIn({ history }) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate onSubmit={onLogin} >
+        <form className={classes.form} noValidate onSubmit={onLogin}>
           <TextField
             variant="outlined"
             margin="normal"
