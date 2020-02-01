@@ -47,7 +47,7 @@ export default function SignIn({ history }) {
     setIsLoading(true);
 
     axiosWithAuth()
-      .post(`http://localhost:5000/staff/login`, credentials)
+      .post(`https://tieme-ndo-5.herokuapp.com/staff/login`, credentials)
       .then(response => {
         console.log(response);
         localStorage.setItem("token", response.data.payload);
