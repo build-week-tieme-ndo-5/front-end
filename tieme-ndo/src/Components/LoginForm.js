@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn({ history }) {
+const SignIn = ({ history }) => {
   const classes = useStyles();
 
   const [credentials, setCredentials] = useState({
@@ -47,7 +47,7 @@ export default function SignIn({ history }) {
     setIsLoading(true);
 
     axiosWithAuth()
-      .put(`http://localhost:6000/staff/login`, credentials)
+      .post(`https://tieme-ndo-5.herokuapp.com/staff/login`, credentials)
       .then(response => {
         console.log(response);
         localStorage.setItem("token", response.data.payload);
@@ -125,4 +125,5 @@ export default function SignIn({ history }) {
       </div>
     </Container>
   );
-}
+};
+export default SignIn;

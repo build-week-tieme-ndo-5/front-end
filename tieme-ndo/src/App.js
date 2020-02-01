@@ -31,7 +31,7 @@ function App() {
           </ul>
         </nav>
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={SignIn} />
           <PrivateRoute path="/dashboard" />
           <Route exact path="/" />
         </Switch>
