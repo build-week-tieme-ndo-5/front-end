@@ -1,13 +1,13 @@
-// import React, { useState } from "react";
-// // import { axiosWithAuth } from '../Utilities/axiosWithAuth';
+import React, { useState } from "react";
+// import { axiosWithAuth } from '../Utilities/axiosWithAuth';
 
-// import SignIn from "../Components/LoginForm";
+import SignIn from "../Components/LoginForm";
 
-// const Login = () => {
-//   return (
-//     <>
-//       <SignIn />
-//     </>
-//   );
-// };
-// export default Login;
+const Login = (props) => {
+  return (
+    <>
+      <SignIn history={props.history}/>
+    </>
+  );
+};
+export default Login;

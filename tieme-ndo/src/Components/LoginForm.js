@@ -33,8 +33,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignIn = ({ history }) => {
+const SignIn = (props) => {
   const classes = useStyles();
+  console.log(props)
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -50,8 +51,9 @@ const SignIn = ({ history }) => {
       .post(`https://tieme-ndo-5.herokuapp.com/staff/login`, credentials)
       .then(response => {
         console.log(response);
-        localStorage.setItem("token", response.data.payload);
-        history.push("/dashboard");
+        localStorage.setItem("token", response.data.token);
+        console.log(response.data.token)
+        props.history.push("/dashboard");
       })
       .catch(error => console.log("Error > ", error));
   };
