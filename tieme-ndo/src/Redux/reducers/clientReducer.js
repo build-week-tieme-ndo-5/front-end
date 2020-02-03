@@ -16,7 +16,7 @@ const initialState = {
     }
 }
 
-const clientsReducer = ( state = initialState, action) => {
+const clientReducer = ( state = initialState, action) => {
     console.log(state);
 
     switch(){
@@ -39,7 +39,7 @@ const clientsReducer = ( state = initialState, action) => {
                 error:'',
             }
         default:
-            return: state;
+            return state;
     }
 }
-export default clientsReducer;
+export default clientReducer;
