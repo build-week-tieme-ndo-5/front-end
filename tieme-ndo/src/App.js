@@ -9,6 +9,11 @@ import {
 } from "react-router-dom";
 
 import PrivateRoute from "./Utilities/loginProtectedRoute";
+import Login from "./Views/Login"; //not importing?
+import Dashboard from './Views/Dashboard;
+import ClientList from './Views/ClientList'; // Samuel
+import ClientAdd from './Views/ClientAdd'; // Samuel
+import ClientInfo from './Views/ClientInfo'; // Samuel
 
 function App() {
   return (
