@@ -1,5 +1,4 @@
 import axios from "axios";
-import { dispatch } from "rxjs/internal/observable/pairs";
 
 //All Client Requester Actions
 export const FETCH_CLIENTS_START = "FETCH_CLIENTS_START";
@@ -16,7 +15,7 @@ export const DELETE_CLIENT_DATA_FAILURE = "DELETE_CLIENT_DATA_FAILURE";
 
 export const DELETE_CLIENT_ACCOUNT = "DELETE_CLIENT_ACCOUNT";
 
-// GET a list of Clients
+// .GET > client data requested from Server
 export const getClients = () => {
   dispatch({ type: FETCH_CLIENTS_START });
 
@@ -31,3 +30,30 @@ export const getClients = () => {
       dispatch({ type: FETCH_CLIENTS_FAIL, payload: error });
     });
 };
+
+// .POST > client data pushed to Server from Login Form
+export const postClientRequester = () => dispatch => {
+  dispatch({type: POST_CLIENT_DATA_START});
+  axiosWithAuth()
+      .post("")
+      .then((response) => {
+          dispatch({type:POST_CLIENT_DATA_SUCCESS, payload: response.data});
+      })
+      .catch((error)=>{
+          dispatch({type:POST_CLIENT_DATA_FAILURE, payload: `${error.response}`});
+      })
+}
+
+// .DELETE > client account ?
+export const deleteClient = () => {
+  dispatch({ type: DELETE_CLIENT_ACCOUNT });
+  axiosWithAuth()
+    .delete('')
+    then((response) => {
+      dispatch({ type: DELETE_CLIENT_DATA_SUCCESS, payload: response.data })
+    })
+    .catch((error) => {
+      dispatch({ type: DELETE_CLIENT_DATA_FAILURE, payload: `${error.response}` })
+    })
+
+}
