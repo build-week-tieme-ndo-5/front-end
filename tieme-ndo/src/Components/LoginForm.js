@@ -12,6 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import {useHistory} from 'react-router-dom';
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -35,7 +37,8 @@ const useStyles = makeStyles(theme => ({
 
 const SignIn = (props) => {
   const classes = useStyles();
-  console.log(props)
+
+  const history = useHistory();
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -47,13 +50,15 @@ const SignIn = (props) => {
     event.preventDefault();
     setIsLoading(true);
 
+    console.log(credentials)
+
     axiosWithAuth()
-      .post(`https://tieme-ndo-5.herokuapp.com/staff/login`, credentials)
+      .post(`http://localhost:5000/staff/login`, credentials)
       .then(response => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token)
-        props.history.push("/dashboard");
+        history.push("/");
       })
       .catch(error => console.log("Error > ", error));
   };

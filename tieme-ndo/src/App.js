@@ -32,7 +32,7 @@ function App() {
         </nav>
         <Switch>
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/dashboard" />
+          <PrivateRoute path="/dashboard"/>
           <Route exact path="/" />
         </Switch>
       </div>
