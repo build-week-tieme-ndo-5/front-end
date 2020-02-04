@@ -3,10 +3,10 @@ import React, { useState } from "react";
 
 import SignIn from "../Components/LoginForm";
 
-const Login = () => {
+const Login = (props) => {
   return (
     <>
-      <SignIn />
+      <SignIn history={props.history}/>
     </>
   );
 };
