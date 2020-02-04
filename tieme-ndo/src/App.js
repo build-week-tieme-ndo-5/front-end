@@ -10,6 +10,7 @@ import {
 
 import PrivateRoute from "./Utilities/loginProtectedRoute";
 import SignIn from "./Components/LoginForm";
+import Login from './Views/Login';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <div className="App">
         <nav>
           <ul>
-            <SignIn />
+            {/* <SignIn /> */}
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -31,7 +32,7 @@ function App() {
         </nav>
         <Switch>
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/dashboard"/>
           <Route exact path="/" />
         </Switch>
       </div>
