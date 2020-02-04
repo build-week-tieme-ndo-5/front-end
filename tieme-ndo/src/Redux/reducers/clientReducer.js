@@ -2,12 +2,12 @@ import { FETCH_CLIENTS_START, FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAIL } from '
 
 const initialState = {
     currentStaff: {
-        key: valuePair,
-        key: valuePair
+        // key: valuePair,
+        // key: valuePair
     },
     selectClient: {
-        key: valuePair,
-        key: valuePair
+        // key: valuePair,
+        // key: valuePair
     },
     general: {
         clients: [],
@@ -19,7 +19,7 @@ const initialState = {
 const clientReducer = ( state = initialState, action) => {
     console.log(state);
 
-    switch(){
+    switch(action.type){
         case FETCH_CLIENTS_START:
             return {
                 ...state,
