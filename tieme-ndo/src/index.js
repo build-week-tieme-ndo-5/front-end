@@ -5,15 +5,15 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { Provider } from "react-dom";
+import { Provider } from "react-redux";
 import { createStore } from "redux";
 import clientReducer from "./Redux/reducers/clientReducer";
 
-import logger from "react-redux";
+// import logger from "react-redux";
 import { applyMiddleware } from "redux";
-import thunk from "react-redux";
+import thunk from "redux-thunk";
 
-const store = createStore(clientReducer, applyMiddleware(thunk, logger));
+const store = createStore(clientReducer, applyMiddleware(thunk));
 
 
 ReactDOM.render(
