@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import PrivateRoute from "./Utilities/loginProtectedRoute";
-import SignIn from "./Components/LoginForm";
+// import SignIn from "./Components/LoginForm";
 import Login from './Views/Login';
 
 function App() {
