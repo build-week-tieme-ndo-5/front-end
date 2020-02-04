@@ -1,22 +1,28 @@
 import { FETCH_CLIENTS_START, FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAIL } from '../actions/serverActions';
 
 const initialState = {
-    currentStaff: {
-        // key: valuePair,
-        // key: valuePair
+    createClient: { //to CREATE a new Client?
+    id: '',                
+    name: "",
+    village: '',
+    loan_amount: "",
+    loan_start: "",
+    loan_due: "",
+    last_payment: "",
+    payment_date: "",
+    harvest_yield: "",
+    sales_goal: ""
     },
     selectClient: {
-        // key: valuePair,
-        // key: valuePair
-    },
-    general: {
-        clients: [],
-        error: '',
-        isFetching: false
+        id: '',
+        name: '',                
+        loan_due: "" 
     }
+    error: '',
+    isFetching: false
 }
 
-const clientReducer = ( state = initialState, action) => {
+export const createClient = ( state = initialState.createClient, action) => {
     console.log(state);
 
     switch(action.type){
@@ -42,4 +48,3 @@ const clientReducer = ( state = initialState, action) => {
             return state;
     }
 }
-export default clientReducer;
