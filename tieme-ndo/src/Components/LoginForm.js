@@ -58,7 +58,7 @@ const SignIn = (props) => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token)
-        history.push("/");
+        history.push("/dashboard");
       })
       .catch(error => console.log("Error > ", error));
   };

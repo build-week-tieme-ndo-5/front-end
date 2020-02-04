@@ -3,8 +3,8 @@ import { axiosWithAuth } from "../Utilities/axiosWithAuth";
 
 import { Route, Redirect } from "react-router-dom";
 
-// import ClientCard from './'
-// import ClientForm from './'
+import ClientList from "./ClientList";
+import ClientInfo from "./ClientInfo";
 
 const Dashboard = props => {
   const [clientsList, setClientsList] = useState([]);
@@ -38,10 +38,10 @@ const Dashboard = props => {
       <Route
         exact
         path="/clients"
-        render={props => <ClientForm {...props} submitClient={addClient} />}
+        render={props => <ClientInfo {...props} submitClient={addClient} />}
       />
       {clientsList.map(client => {
-        return <ClientCard key={client.id} client={client} />;
+        return <ClientList key={client.id} client={client} />;
       })}
       <Route
         path="/clients/:id/update"
@@ -54,7 +54,7 @@ const Dashboard = props => {
             return <Redirect to="/clients" />;
           }
           return (
-            <ClientForm
+            <ClientInfo
               {...props}
               submitClient={addClient}
               initialValues={currentClient}
