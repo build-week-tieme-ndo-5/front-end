@@ -15,7 +15,7 @@ const Dashboard = props => {
     axiosWithAuth()
       .get(`https://tieme-ndo-5.herokuapp.com/clients`)
       .then(response => {
-        console.log(response);
+        console.log("GET >", response);
         setClientsList(response.data);
       })
       .catch(error => console.log("Error >", error));
@@ -28,7 +28,7 @@ const Dashboard = props => {
   //POST/create a Client
   const addClient = clients => {
     axiosWithAuth()
-      .post("http://localhost:5000/clients/register", clients)
+      .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
       .then(response => setClientsList(response.data))
       .catch(error => console.log("Error >", error.response));
   };
@@ -36,6 +36,7 @@ const Dashboard = props => {
   return (
     <div>
       <h3>Dashboard</h3>
+      <button onSubmit={addClient}>Add Client</button>
       <Route
         exact
         path="/clients"
