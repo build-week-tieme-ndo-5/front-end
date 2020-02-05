@@ -12,7 +12,7 @@ const Dashboard = props => {
   //GET a list of Clients
   const getClientsList = () => {
     axiosWithAuth()
-      .get(`http://localhost:5000/clients`)
+      .get(`https://tieme-ndo-5.herokuapp.com/clients`)
       .then(response => {
         console.log(response);
         setClientsList(response.data);
