@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from '@material-ui/core';
 
 function ClientList(props) {
   console.log(props);
@@ -18,7 +19,7 @@ function ClientList(props) {
           <p>Village Name:{client.village}</p>
           <p>Loan Amount: ${client.loan_amount}</p>
         </div>
-      
+        <Link to={`/client-list/${client.id}`}><Button variant="contained" color="primary">Edit</Button></Link>
     </div>
   );
 }
