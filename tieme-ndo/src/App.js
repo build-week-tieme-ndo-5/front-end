@@ -11,6 +11,7 @@ import {
 import PrivateRoute from "./Utilities/loginProtectedRoute";
 import SignIn from "./Components/LoginForm";
 import Login from './Views/Login';
+import Dashboard from './Views/Dashboard';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         </nav>
         <Switch>
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/dashboard"/>
+          <PrivateRoute path="/dashboard" component={Dashboard} />
           <Route exact path="/" />
         </Switch>
       </div>

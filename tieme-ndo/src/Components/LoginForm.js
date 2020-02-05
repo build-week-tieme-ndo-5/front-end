@@ -53,12 +53,13 @@ const SignIn = (props) => {
     console.log(credentials)
 
     axiosWithAuth()
-      .post(`http://localhost:5000/staff/login`, credentials)
+      .post(`
+      https://tieme-ndo-5.herokuapp.com/staff/login`, credentials)
       .then(response => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token)
-        history.push("/");
+        history.push("/dashboard");
       })
       .catch(error => console.log("Error > ", error));
   };
