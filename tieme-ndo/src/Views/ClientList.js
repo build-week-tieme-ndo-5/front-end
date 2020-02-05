@@ -13,9 +13,10 @@ function ClientList(props) {
     <div>
       
         <div key={client.id}>
-          <Link to={`/client-list/${client.id}`}>
-            <p>Client Name: {client.name}</p>
-          </Link>
+          {/* <Link to={`/client-list/${client.id}`}>
+            
+          </Link> */}
+          <p>Client Name: {client.name}</p>
           <p>Village Name:{client.village}</p>
           <p>Loan Amount: ${client.loan_amount}</p>
         </div>

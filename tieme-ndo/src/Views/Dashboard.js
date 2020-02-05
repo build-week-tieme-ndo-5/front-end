@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../Utilities/axiosWithAuth";
 
 import { Route, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from '@material-ui/core';
 
 import ClientList from "./ClientList";
 import ClientInfo from "./ClientInfo";
+import ClientAdd from './ClientAdd';
 
 const Dashboard = props => {
   const [clientsList, setClientsList] = useState([]);
@@ -36,16 +39,17 @@ const Dashboard = props => {
   return (
     <div>
       <h3>Dashboard</h3>
-      <button onSubmit={addClient}>Add Client</button>
-      <Route
+      <Link to={`/client-add`}><Button variant="contained" color="primary">Add Client</Button></Link>
+
+      {/* <Route
         exact
         path="/clients"
         render={props => <ClientInfo {...props} submitClient={addClient} />}
-      />
+      /> */}
       {clientsList.map(client => {
         return <ClientList key={client.id} client={client} />;
       })}
-      <Route
+      {/* <Route
         path="/clients/:id/update"
         render={props => {
           console.log(props);
@@ -63,7 +67,7 @@ const Dashboard = props => {
             />
           );
         }}
-      />
+      /> */}
     </div>
   );
 };
