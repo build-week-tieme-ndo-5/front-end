@@ -18,11 +18,11 @@ const initialState = {
         name: '',                
         loan_due: "" 
     }
-    error: '',
-    isFetching: false
+    // error: ''
+    // isFetching: false
 }
 
-export const createClient = ( state = initialState.createClient, action) => {
+const createClient = ( state = initialState.createClient, action) => {
     console.log(state);
 
     switch(action.type){
@@ -48,3 +48,4 @@ export const createClient = ( state = initialState.createClient, action) => {
             return state;
     }
 }
+export default createClient;
