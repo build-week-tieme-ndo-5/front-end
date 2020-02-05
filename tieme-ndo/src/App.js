@@ -21,6 +21,7 @@ function App() {
       <div className="App">
         <nav>
           <ul>
+            {/* <SignIn /> */}
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
