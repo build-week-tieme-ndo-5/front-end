@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../Utilities/axiosWithAuth";
-
+import {useHistory} from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import {useFormInput} from '../Hooks/hooks.js'
 
 const newClient = {
   name: "", // string - required
@@ -16,7 +17,25 @@ const newClient = {
 };
 
 const ClientAdd = props => {
-  console.log(props);
+  const {clientsList, setClientsList} = props;
+  console.log(clientsList);
+  const history = useHistory();
+  const name = useFormInput({placeholder:"Name", initialValue:"" })
+  const village = useFormInput({placeholder:"Village", initialValue:""})
+  const loan_amount= useFormInput({placeholder:"Loan Amount", initialValue:""});
+  const loan_start = useFormInput({placeholder:"Loan Start", initialValue:""});
+  const loan_due = useFormInput({placeholder: "Loan Due", initialValue:""});
+  const payment = useFormInput({placeholder: "Payment", initialValue:""});
+  const payment_date = useFormInput({placeholder:"Payment Date", initialValue:""});
+  const last_payment = useFormInput({placeholder: "Last Payment", initialValue:""});
+  const harvest_yield = useFormInput({placeholder:"Harvest Yield", initialValue:""});
+  const sales_goal = useFormInput({placeholder: "Sales Goal", initialValue:""})
+
+   const newClient = {
+    name: name.value, village: village.value, loan_amount: loan_amount.value, loan_start: loan_start.value, payment: payment.value, payment_date: payment_date.value,last_payment:  last_payment.value, harvest_yield: harvest_yield.value, sales_goal: sales_goal.value
+  }
+
+
 
   const [createClient, setCreateClient] = useState(newClient);
     console.log(createClient)
@@ -30,77 +49,58 @@ const ClientAdd = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    props.addClient(createClient);
+    const clientToBeAdded = newClient
+    props.addClient(clientToBeAdded);
+    const newList = [...clientsList, clientToBeAdded];
+    setClientsList(newList);
+    history.push('/dashboard');
+
   };
 
+ 
+ 
   return (
     <div>
       <h3>Client Add</h3>
       <form onSubmit={handleSubmit}>
-        <p>Name: <input 
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={createClient.name}
-            onChange={handleChange}
+        <p>Name: 
+        <input 
+          type="text"
+           {...name}
         /></p>
         <p>Village: <input 
-            type="text"
-            placeholder="Village"
-            name="village"
-            value={createClient.village}
-            onChange={handleChange}
+            
+           {...village}
         /></p>
         <p>Loan Amount: <input 
-            type="text"
-            placeholder="Loan Amount"
-            name="loan amount"
-            value={createClient.loan_amount}
-            onChange={handleChange}
+            
+            {...loan_amount}
         /></p>
         <p>Loan Start: <input 
-            type="text"
-            placeholder="Loan start"
-            name="loan start"
-            value={createClient.loan_start}
-            onChange={handleChange}
+            
+            {...loan_start}
         /></p>
         <p>Loan Due: <input 
-            type="text"
-            placeholder="Loan due"
-            name="loan due"
-            value={createClient.loan_due}
-            onChange={handleChange}
+            
+            {...loan_due}
         /></p>
         <p>Last Payment: <input 
-            type="text"
-            placeholder="Last Payment"
-            name="last payment"
-            value={createClient.loan_due}
-            onChange={handleChange}
+            
+            {...last_payment}
         /></p>
         <p>Payment Date: <input 
-            type="text"
-            placeholder="Payment Date"
-            name="payment date"
-            value={createClient.payment_date}
-            onChange={handleChange}
+            
+            {...payment_date}
         /></p>
         <p>Harvest Yield: <input 
-            type="text"
-            placeholder="Harvest Yield"
-            name="harvest yield"
-            value={createClient.harvest_yield}
-            onChange={handleChange}
+          
+            {...harvest_yield}
         /></p>
         <p>Sales Goal: <input 
-            type="text"
-            placeholder="Sales Goal"
-            name="Sales Goal"
-            value={createClient.sales_goal}
-            onChange={handleChange}
+            
+            {...sales_goal}
         /></p>
-        <Button variant="contained" color="primary">Add Client</Button>
+        <Button onClick={e => handleSubmit(e)} variant="contained" color="primary">Add Client</Button>
       </form>
     </div>
   );

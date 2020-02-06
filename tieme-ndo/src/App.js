@@ -57,6 +57,8 @@ function App() {
           component={ClientAdd}
           path="/dashboard/client-add"
           addClient={addClient}
+          setClientsList={setClientsList}
+          clientsLists={clientsList}
         />
         <Route exact path="/" />
       </Switch>

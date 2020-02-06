@@ -12,6 +12,8 @@ import ClientAdd from './ClientAdd';
 const Dashboard = props => {
   const {clientsList, setClientsList} = props;
 
+  console.log(clientsList);
+
   //GET a list of Clients
   const getClientsList = () => {
     axiosWithAuth()
