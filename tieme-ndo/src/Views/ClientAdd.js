@@ -13,12 +13,12 @@ const newClient = {
     sales_goal: ""               // integer - optional
 }
 
-const ClientAdd = () => {
-  console.log();
+const ClientAdd = (props) => {
+  console.log(props);
 
   return (
     <div>
-      <h3>ClientAdd</h3>
+      <h3>Client Add</h3>
     </div>
   );
 };

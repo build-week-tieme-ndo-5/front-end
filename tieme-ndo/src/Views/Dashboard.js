@@ -1,17 +1,16 @@
 
 import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../Utilities/axiosWithAuth";
-
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from '@material-ui/core';
-
+import PrivateRoute from '../Utilities/loginProtectedRoute.js'
 import ClientList from "./ClientList";
 import ClientInfo from "./ClientInfo";
 import ClientAdd from './ClientAdd';
 
 const Dashboard = props => {
-  const [clientsList, setClientsList] = useState([]);
+  const {clientsList, setClientsList} = props;
 
   //GET a list of Clients
   const getClientsList = () => {
@@ -29,23 +28,18 @@ const Dashboard = props => {
   }, []);
 
   //POST/create a Client
-  const addClient = clients => {
-    axiosWithAuth()
-      .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
-      .then(response => setClientsList(response.data))
-      .catch(error => console.log("Error >", error.response));
-  };
+ 
 
   return (
     <div>
+      
+     
       <h3>Dashboard</h3>
-      <Link to={`/client-add`}><Button variant="contained" color="primary">Add Client</Button></Link>
+      <Link to={'/dashboard/client-add'}><Button variant="contained" color="primary">Add Client</Button></Link>
+      
+       
+      
 
-      {/* <Route
-        exact
-        path="/clients"
-        render={props => <ClientInfo {...props} submitClient={addClient} />}
-      /> */}
       {clientsList.map(client => {
         return <ClientList key={client.id} client={client} />;
       })}
@@ -60,7 +54,7 @@ const Dashboard = props => {
             return <Redirect to="/clients" />;
           }
           return (
-            <ClientInfo
+            <ClientAdd
               {...props}
               submitClient={addClient}
               initialValues={currentClient}
