@@ -18,12 +18,14 @@ import ClientInfo from "./Views/ClientInfo"; // Samuel
 
 function App() {
   const [clientsList, setClientsList] = useState([]);
+
   const addClient = clients => {
     axiosWithAuth()
       .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
       .then(response => setClientsList(response.data))
       .catch(error => console.log("Error >", error.response));
   };
+
   return (
     <div className="App">
       <nav>
@@ -51,17 +53,15 @@ function App() {
         />
         <PrivateRoute path="/dashboard/client-list" component={ClientList} />
         <PrivateRoute path="/dashboard/client-edit" component={ClientInfo} />
-        <Route exact path="/" />
         <PrivateRoute
           component={ClientAdd}
           path="/dashboard/client-add"
           addClient={addClient}
         />
+        <Route exact path="/" />
       </Switch>
     </div>
   );
 }
 
 export default App;
-
-// <PrivateRoute path="/dashboard/client-add" component={ClientAdd} />

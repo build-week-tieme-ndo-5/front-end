@@ -27,19 +27,11 @@ const Dashboard = props => {
     getClientsList();
   }, []);
 
-  //POST/create a Client
- 
-
   return (
     <div>
-      
-     
       <h3>Dashboard</h3>
       <Link to={'/dashboard/client-add'}><Button variant="contained" color="primary">Add Client</Button></Link>
       
-       
-      
-
       {clientsList.map(client => {
         return <ClientList key={client.id} client={client} />;
       })}
