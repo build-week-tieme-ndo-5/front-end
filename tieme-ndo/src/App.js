@@ -9,7 +9,11 @@ import {
 } from "react-router-dom";
 
 import PrivateRoute from "./Utilities/loginProtectedRoute";
-import SignIn from "./Components/LoginForm";
+import Login from "./Views/Login"; //not importing?
+import Dashboard from './Views/Dashboard;
+import ClientList from './Views/ClientList'; // Samuel
+import ClientAdd from './Views/ClientAdd'; // Samuel
+import ClientInfo from './Views/ClientInfo'; // Samuel
 
 function App() {
   return (
@@ -17,7 +21,7 @@ function App() {
       <div className="App">
         <nav>
           <ul>
-            <SignIn />
+            {/* <SignIn /> */}
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -32,6 +36,9 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="dashboard/client-list" component={ClientList} />
+          <PrivateRoute path="dashboard/client-edit" component={ClientInfo} />
+          <PrivateRoute path="dashboard/client-add" component={ClientAdd} />
           <Route exact path="/" />
         </Switch>
       </div>
