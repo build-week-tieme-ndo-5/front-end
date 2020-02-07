@@ -19,7 +19,9 @@ const newClient = {
 const ClientAdd = props => {
   const {clientsList, setClientsList} = props;
   console.log(clientsList);
+
   const history = useHistory();
+
   const name = useFormInput({placeholder:"Name", initialValue:"" })
   const village = useFormInput({placeholder:"Village", initialValue:""})
   const loan_amount= useFormInput({placeholder:"Loan Amount", initialValue:""});
@@ -34,8 +36,6 @@ const ClientAdd = props => {
    const newClient = {
     name: name.value, village: village.value, loan_amount: loan_amount.value, loan_start: loan_start.value, payment: payment.value, payment_date: payment_date.value,last_payment:  last_payment.value, harvest_yield: harvest_yield.value, sales_goal: sales_goal.value
   }
-
-
 
   const [createClient, setCreateClient] = useState(newClient);
     console.log(createClient)
@@ -54,11 +54,8 @@ const ClientAdd = props => {
     const newList = [...clientsList, clientToBeAdded];
     setClientsList(newList);
     history.push('/dashboard');
-
   };
 
- 
- 
   return (
     <div>
       <h3>Client Add</h3>

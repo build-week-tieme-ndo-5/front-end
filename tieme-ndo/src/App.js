@@ -17,14 +17,45 @@ import ClientAdd from "./Views/ClientAdd"; // Samuel
 import ClientInfo from "./Views/ClientInfo"; // Samuel
 
 function App() {
+  //to ClientAdd passed as props
   const [clientsList, setClientsList] = useState([]);
 
+  //to ClientInfo passed as props
+  const [editing, setEditing] = useState(false);
+  const [clientToEdit, setClientToEdit] = useState(null);
+
+  //to ClientAdd passed as props
   const addClient = clients => {
     axiosWithAuth()
       .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
       .then(response => setClientsList(response.data))
       .catch(error => console.log("Error >", error.response));
   };
+//to ClientInfo passed as props
+  const editClient = (event) => {
+    event.preventDefault();
+
+    const id = clientToEdit.id;
+    console.log({ clientToEdit });
+
+    axiosWithAuth()
+      .put(`https://tieme-ndo-5.herokuapp.com/clients/${id}/update`, clientToEdit)
+      .then(response => {
+        const updatedClient = response.data;
+        console.log({updatedColor});
+        const newClient = clientsList.map(currentClient => {
+          console.log(currentClient);
+          if(updatedClient.id === currentClient.id){
+            return updatedClient
+          }
+          return currentClient
+        });
+        updatedClients(newClient)
+      })
+      .catch(error => console.log("Error .PUT", error))
+
+      setEditing(false);
+  }
 
   return (
     <div className="App">
@@ -51,8 +82,16 @@ function App() {
           clientsList={clientsList}
           setClientsList={setClientsList}
         />
-        <PrivateRoute path="/dashboard/client-list" component={ClientList} />
-        <PrivateRoute path="/dashboard/client-edit" component={ClientInfo} />
+        <PrivateRoute component={ClientList} path="/dashboard/client-list"  />
+        <PrivateRoute 
+          component={ClientInfo} 
+          path="/dashboard/client-edit"  
+          editClient={editClient}
+          editing={editing}
+          setEditing={setEditing}
+          clientToEdit={clientToEdit}
+          setClientToEdit={setClientToEdit}
+        />
         <PrivateRoute
           component={ClientAdd}
           path="/dashboard/client-add"

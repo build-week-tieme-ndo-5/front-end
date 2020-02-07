@@ -1,6 +1,12 @@
 import React from 'react'
 
-const ClientInfo = () => {
+//const [editing, setEditing] = useState(false);
+//const [clientToEdit, setClientToEdit] = useState(null);
+
+// editClient === .PUT request @ https://tieme-ndo-5.herokuapp.com/clients/${id}/update`
+
+
+const ClientInfo = ({editClient, editing, setEditing, clientToEdit, setClientToEdit}) => {
 
     return (
         <div>
