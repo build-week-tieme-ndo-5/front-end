@@ -26,6 +26,8 @@ function App() {
 
   //to ClientAdd passed as props
   const addClient = clients => {
+      console.log('add client is running')
+      console.log(clients, 'clients from add client')
     axiosWithAuth()
       .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
       .then(response => setClientsList(response.data))
@@ -42,7 +44,7 @@ function App() {
       .put(`https://tieme-ndo-5.herokuapp.com/clients/${id}/update`, clientToEdit)
       .then(response => {
         const updatedClient = response.data;
-        console.log({updatedColor});
+        console.log({updatedClient});
         const newClient = clientsList.map(currentClient => {
           console.log(currentClient);
           if(updatedClient.id === currentClient.id){
@@ -50,7 +52,7 @@ function App() {
           }
           return currentClient
         });
-        updatedClients(newClient)
+        updatedClient(newClient)
       })
       .catch(error => console.log("Error .PUT", error))
 
@@ -97,7 +99,7 @@ function App() {
           path="/dashboard/client-add"
           addClient={addClient}
           setClientsList={setClientsList}
-          clientsLists={clientsList}
+          clientsList={clientsList}
         />
         <Route exact path="/" />
       </Switch>

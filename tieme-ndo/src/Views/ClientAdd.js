@@ -17,8 +17,10 @@ const newClient = {
 };
 
 const ClientAdd = props => {
-  const {clientsList, setClientsList} = props;
-  console.log(clientsList);
+  const {clientsList, setClientsList, addClient} = props;
+  console.log(props, 'props client add')
+  console.log(clientsList, 'clients list')
+
 
   const history = useHistory();
 
@@ -32,25 +34,28 @@ const ClientAdd = props => {
   const last_payment = useFormInput({placeholder: "Last Payment", initialValue:""});
   const harvest_yield = useFormInput({placeholder:"Harvest Yield", initialValue:""});
   const sales_goal = useFormInput({placeholder: "Sales Goal", initialValue:""})
-
+  console.log(loan_start, 'loan start')
    const newClient = {
-    name: name.value, village: village.value, loan_amount: loan_amount.value, loan_start: loan_start.value, payment: payment.value, payment_date: payment_date.value,last_payment:  last_payment.value, harvest_yield: harvest_yield.value, sales_goal: sales_goal.value
+    name: name.value, village: village.value, loan_amount: parseInt(loan_amount.value), loan_start: loan_start.value, loan_due: loan_due.value,  payment: payment.value, payment_date: payment_date.value,last_payment:  last_payment.value, harvest_yield: harvest_yield.value, sales_goal: sales_goal.value
   }
 
-  const [createClient, setCreateClient] = useState(newClient);
-    console.log(createClient)
+  console.log(newClient)
+
+//   const [createClient, setCreateClient] = useState(newClient);
+//     console.log(createClient)
     
-  const handleChange = event => {
-    setCreateClient({
-      ...createClient,
-      [event.target.name]: event.target.value
-    });
-  };
+//   const handleChange = event => {
+//     setCreateClient({
+//       ...createClient,
+//       [event.target.name]: event.target.value
+//     });
+//   };
 
   const handleSubmit = event => {
     event.preventDefault();
     const clientToBeAdded = newClient
-    props.addClient(clientToBeAdded);
+    console.log(clientToBeAdded, 'added client')
+    addClient(clientToBeAdded);
     const newList = [...clientsList, clientToBeAdded];
     setClientsList(newList);
     history.push('/dashboard');
