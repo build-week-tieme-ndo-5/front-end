@@ -26,37 +26,15 @@ function App() {
 
   //to ClientAdd passed as props
   const addClient = clients => {
+      console.log('add client is running')
+      console.log(clients, 'clients from add client')
     axiosWithAuth()
       .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
       .then(response => setClientsList(response.data))
       .catch(error => console.log("Error >", error.response));
   };
 //to ClientInfo passed as props
-  const editClient = (event) => {
-    event.preventDefault();
-
-    const id = clientToEdit.id;
-    console.log({ clientToEdit });
-
-    axiosWithAuth()
-      .put(`https://tieme-ndo-5.herokuapp.com/clients/${id}/update`, clientToEdit)
-      .then(response => {
-        const updatedClient = response.data;
-
-        console.log({updatedColor});
-        const newClient = clientsList.filter(currentClient => {
-          console.log(currentClient);
-          if(updatedClient.id === currentClient.id){
-            return updatedClient
-          }
-          return currentClient
-        });
-        updatedClient(newClient)
-      })
-      .catch(error => console.log("Error .PUT", error))
-
-      setEditing(false);
-  }
+  
 
   return (
     <div className="App">
@@ -87,18 +65,15 @@ function App() {
         <PrivateRoute 
           component={ClientInfo} 
           path="/dashboard/client-edit"  
-          editClient={editClient}
-          editing={editing}
-          setEditing={setEditing}
-          clientToEdit={clientToEdit}
-          setClientToEdit={setClientToEdit}
+          clientsList={clientsList}
+          setClientsList={setClientsList}
         />
         <PrivateRoute
           component={ClientAdd}
           path="/dashboard/client-add"
           addClient={addClient}
           setClientsList={setClientsList}
-          clientsLists={clientsList}
+          clientsList={clientsList}
         />
         <Route exact path="/" />
       </Switch>
