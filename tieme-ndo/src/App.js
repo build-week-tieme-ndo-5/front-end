@@ -42,15 +42,16 @@ function App() {
       .put(`https://tieme-ndo-5.herokuapp.com/clients/${id}/update`, clientToEdit)
       .then(response => {
         const updatedClient = response.data;
+
         console.log({updatedColor});
-        const newClient = clientsList.map(currentClient => {
+        const newClient = clientsList.filter(currentClient => {
           console.log(currentClient);
           if(updatedClient.id === currentClient.id){
             return updatedClient
           }
           return currentClient
         });
-        updatedClients(newClient)
+        updatedClient(newClient)
       })
       .catch(error => console.log("Error .PUT", error))
 
