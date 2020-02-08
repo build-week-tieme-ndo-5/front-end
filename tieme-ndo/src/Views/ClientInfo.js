@@ -55,7 +55,6 @@ const ClientInfo = ({clientsList, setClientsList }) => {
 				{/* <textarea {...name} /> */}
 				<input type='text'
 				{...name}
-				defaultValue={client.name}
 				/></p>
 				<Button onClick={e => handleSubmit(e)} variant="contained" color="primary">Update Client</Button>
 			</form>
