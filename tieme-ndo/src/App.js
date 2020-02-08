@@ -8,9 +8,14 @@ import {
   Switch
 } from "react-router-dom";
 
+import { connect } from 'react-redux'
+
 import PrivateRoute from "./Utilities/loginProtectedRoute";
-// import SignIn from "./Components/LoginForm";
-import Login from './Views/Login';
+import Login from "./Views/Login"; //not importing?
+import Dashboard from "./Views/Dashboard";
+import ClientList from "./Views/ClientList"; // Samuel
+import ClientAdd from "./Views/ClientAdd"; // Samuel
+import ClientInfo from "./Views/ClientInfo"; // Samuel
 
 function App() {
   return (
@@ -32,7 +37,10 @@ function App() {
         </nav>
         <Switch>
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/dashboard"/>
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="dashboard/client-list" component={ClientList} />
+          <PrivateRoute path="dashboard/client-edit" component={ClientInfo} />
+          <PrivateRoute path="dashboard/client-add" component={ClientAdd} />
           <Route exact path="/" />
         </Switch>
       </div>
@@ -40,4 +48,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    state
+  };
+};
+
+export default connect(mapStateToProps, {})(App);

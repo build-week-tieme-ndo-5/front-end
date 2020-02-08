@@ -9,18 +9,19 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import createClient from "./Redux/reducers/clientReducer";
 
-// import logger from "react-redux";
+
+// import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-const store = createStore(createClient, applyMiddleware(thunk));
 
+const store = createStore(createClient, applyMiddleware(thunk));
 
 ReactDOM.render(
   <BrowserRouter>
-  <Provider store={store} > 
-    <App />
-  </Provider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );
