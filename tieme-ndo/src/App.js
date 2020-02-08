@@ -20,10 +20,6 @@ function App() {
   //to ClientAdd passed as props
   const [clientsList, setClientsList] = useState([]);
 
-  //to ClientInfo passed as props
-  const [editing, setEditing] = useState(false);
-  const [clientToEdit, setClientToEdit] = useState(null);
-
   //to ClientAdd passed as props
   const addClient = clients => {
       console.log('add client is running')
@@ -64,7 +60,7 @@ function App() {
         <PrivateRoute component={ClientList} path="/dashboard/client-list"  />
         <PrivateRoute 
           component={ClientInfo} 
-          path="/dashboard/client-edit"  
+          path="/client-list/:id"  
           clientsList={clientsList}
           setClientsList={setClientsList}
         />
