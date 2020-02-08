@@ -34,7 +34,7 @@ const ClientInfo = ({clientsList, setClientsList }) => {
 
 	const handleSubmit = (event) => {
         event.preventDefault();
-        const id = id
+        // const id = id
 
 		axiosWithAuth()
 			.put(`https://tieme-ndo-5.herokuapp.com/clients/${id}/update`, client)
@@ -49,10 +49,10 @@ const ClientInfo = ({clientsList, setClientsList }) => {
 
 	return (
 		<div>
-			<h4>Edit Client: {client.name}</h4>
+			<h4>Edit Client</h4>
 			<form onSubmit={handleSubmit} >
-				<p>Name:
-				<textarea {...name} />
+				<p>Name: 
+				{/* <textarea {...name} /> */}
 				<input type='text'
 				{...name}
 				defaultValue={client.name}

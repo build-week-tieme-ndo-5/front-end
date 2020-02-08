@@ -29,8 +29,6 @@ function App() {
       .then(response => setClientsList(response.data))
       .catch(error => console.log("Error >", error.response));
   };
-//to ClientInfo passed as props
-  
 
   return (
     <div className="App">
