@@ -12,7 +12,6 @@ import { Button } from '@material-ui/core';
 const ClientInfo = ({clientsList, setClientsList }) => {
 	const [ client, setClient ] = useState([]);
 	const { id } = useParams();
-    console.log(client, 'client')
     
     const history = useHistory()
 	
@@ -20,12 +19,9 @@ const ClientInfo = ({clientsList, setClientsList }) => {
 	const village = useFormInput({placeholder: "Village", initialValue: ''})
 	const loanAmount = useFormInput({placeholder: "Loan Amount", initialValue: 0})
 
-	console.log(clientsList)
 	useEffect(() => {
 		
 		const client = clientsList.filter((client) => {
-            console.log(client)
-            console.log(id, 'id from params')
 			return client.id == id;
         });
 		setClient(client[0]);
@@ -34,17 +30,16 @@ const ClientInfo = ({clientsList, setClientsList }) => {
 	
 	const handleSubmit = (event) => {
         event.preventDefault();
-		const newClient = {name: name.value, village: village.value, loanAmount: loanAmount.value }
+		const newClient = {name: name.value, village: village.value, loan_amount: loanAmount.value }
+		console.log(newClient)
 		
-         console.log(client)
 		axiosWithAuth()
             .put(`https://tieme-ndo-5.herokuapp.com/clients/${id}/update`, newClient)
 			.then((response) => {
-                console.log(response)
-                const updatedClient = response.data;
+				const updatedClient = response.data;
+				console.log(response)
                 const updatedClientsList = [...clientsList, updatedClient]
                 setClientsList(updatedClientsList)
-                console.log({ updatedClient });
                 history.push('/dashboard')
 			})
 			.catch((error) => console.log('Error .PUT', error));
