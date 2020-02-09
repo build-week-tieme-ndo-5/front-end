@@ -17,7 +17,6 @@ const initialState = {
 }
 
 const clientReducer = ( state = initialState, action) => {
-    console.log(state);
 
     switch(action.type){
         case FETCH_CLIENTS_START:

@@ -12,11 +12,9 @@ export const getClients = () => {
   axios
     .get(``)
     .then(response => {
-      console.log(response.data.message);
       dispatch({ type: FETCH_CLIENTS_SUCCESS, payload: response.data.message });
     })
     .catch(error => {
-      console.log("Error =>", error);
       dispatch({ type: FETCH_CLIENTS_FAIL, payload: error });
     });
 };

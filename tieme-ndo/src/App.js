@@ -22,8 +22,6 @@ function App() {
 
   //to ClientAdd passed as props
   const addClient = clients => {
-      console.log('add client is running')
-      console.log(clients, 'clients from add client')
     axiosWithAuth()
       .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
       .then(response => setClientsList(response.data))
@@ -55,7 +53,12 @@ function App() {
           clientsList={clientsList}
           setClientsList={setClientsList}
         />
-        <PrivateRoute component={ClientList} path="/dashboard/client-list"  />
+        <PrivateRoute 
+          component={ClientList}
+          path="/dashboard/client-list"  
+          setClientsList={setClientsList}
+          clientsList={clientsList}
+          />
         <PrivateRoute 
           component={ClientInfo} 
           path="/client-list/:id"  

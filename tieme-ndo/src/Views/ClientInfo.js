@@ -31,7 +31,6 @@ const ClientInfo = ({clientsList, setClientsList }) => {
 	const handleSubmit = (event) => {
         event.preventDefault();
 		const newClient = {name: name.value, village: village.value, loan_amount: loanAmount.value }
-		console.log(newClient)
 		
 		axiosWithAuth()
             .put(`https://tieme-ndo-5.herokuapp.com/clients/${id}/update`, newClient)

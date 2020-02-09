@@ -18,9 +18,6 @@ const newClient = {
 
 const ClientAdd = props => {
   const {clientsList, setClientsList, addClient} = props;
-  console.log(props, 'props client add')
-  console.log(clientsList, 'clients list')
-
 
   const history = useHistory();
 
@@ -54,7 +51,6 @@ const ClientAdd = props => {
   const handleSubmit = event => {
     event.preventDefault();
     const clientToBeAdded = newClient
-    console.log(clientToBeAdded, 'added client')
     addClient(clientToBeAdded);
     const newList = [...clientsList, clientToBeAdded];
     setClientsList(newList);

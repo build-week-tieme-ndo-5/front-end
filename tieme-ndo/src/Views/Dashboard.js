@@ -1,13 +1,9 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { axiosWithAuth } from "../Utilities/axiosWithAuth";
-import { Route, Redirect, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from '@material-ui/core';
-import PrivateRoute from '../Utilities/loginProtectedRoute.js'
 import ClientList from "./ClientList";
-import ClientInfo from "./ClientInfo";
-import ClientAdd from './ClientAdd';
 
 const Dashboard = props => {
   const {clientsList, setClientsList} = props;
@@ -19,11 +15,15 @@ const Dashboard = props => {
     axiosWithAuth()
       .get(`https://tieme-ndo-5.herokuapp.com/clients`)
       .then(response => {
-        console.log("GET >", response);
         setClientsList(response.data);
       })
       .catch(error => console.log("Error >", error));
   };
+
+  const deleteFunction = (itemId) => {
+    const result = clientsList.filter(entry => entry.id !== itemId)
+    setClientsList(result)
+  }
 
   useEffect(() => {
     getClientsList();
@@ -35,27 +35,8 @@ const Dashboard = props => {
       <Link to={'/dashboard/client-add'}><Button variant="contained" color="primary">Add Client</Button></Link>
       
       {clientsList.map(client => {
-        return <ClientList key={client.id} client={client} />;
+        return <ClientList key={client.id} client={client} deleteFunction={deleteFunction} />;
       })}
-      {/* <Route
-        path="/clients/:id/update"
-        render={props => {
-          console.log(props);
-          const currentClient = clientsList.find(
-            client => client.id === props.match.params.id
-          );
-          if (!currentClient) {
-            return <Redirect to="/clients" />;
-          }
-          return (
-            <ClientAdd
-              {...props}
-              submitClient={addClient}
-              initialValues={currentClient}
-            />
-          );
-        }}
-      /> */}
     </div>
   );
 };
