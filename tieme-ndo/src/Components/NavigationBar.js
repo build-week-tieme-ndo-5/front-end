@@ -1,39 +1,51 @@
 import React from 'react';
 import { BrowserRouter as Router, NavLink, } from "react-router-dom";
-import Avatar from '@material-ui/core/Avatar';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import { Drawer } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { createMuiTheme } from '@material-ui/core/styles';
+
 
 export default function NavigationBar(){
-  const toggleDrawer = (side, open) => event => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }}
+  const theme = createMuiTheme({palette:{
+    common:{
+        black:"#000",
+        white:"#fff"},
+    background:{
+        paper:"rgba(210, 152, 106, 1)",
+        default:"rgba(206, 208, 158, 1)"},
+    primary:{
+        light:"rgba(112, 137, 120, 1)",
+        main:"rgba(47, 59, 51, 1)",
+        dark:"rgba(21, 53, 32, 1)",
+        contrastText:"#fff"},
+    secondary:{
+        light:"rgba(235, 198, 157, 1)",
+        main:"rgba(223, 165, 98, 1)",
+        dark:"rgba(194, 145, 89, 1)",
+        contrastText:"rgba(0, 0, 0, 1)"},
+    error:{
+        light:"#e57373",
+        main:"#f44336",
+        dark:"#d32f2f",
+        contrastText:"#fff"},
+    text:{
+        primary:"rgba(0, 0, 0, 0.87)",
+        secondary:"rgba(0, 0, 0, 0.54)",
+        disabled:"rgba(0, 0, 0, 0.38)",
+        hint:"rgba(0, 0, 0, 0.38)"}}});
     return(
-<AppBar position="fixed">
+<AppBar position="fixed" color="primary">
         <Toolbar>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={toggleDrawer('left', true)}
           >
             <MenuIcon />
           </IconButton>
-          <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-  {sideList('left')}
-</Drawer>
           <Typography variant="h6" noWrap>
             Tieme NDO
           </Typography>
@@ -41,13 +53,6 @@ export default function NavigationBar(){
           <NavLink to="/">Home</NavLink>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/dashboard">Dashboard</NavLink>
-            {/* <div>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            /> */}
           </div>
         </Toolbar>
       </AppBar>
