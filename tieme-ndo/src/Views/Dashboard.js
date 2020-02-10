@@ -8,25 +8,13 @@ import ClientList from "./ClientList";
 const Dashboard = props => {
   const {clientsList, setClientsList} = props;
 
-  console.log(clientsList);
-
-  //GET a list of Clients
-  const getClientsList = () => {
-    axiosWithAuth()
-      .get(`https://tieme-ndo-5.herokuapp.com/clients`)
-      .then(response => {
-        setClientsList(response.data);
-      })
-      .catch(error => console.log("Error >", error));
-  };
-
   const deleteFunction = (itemId) => {
     const result = clientsList.filter(entry => entry.id !== itemId)
     setClientsList(result)
   }
 
   useEffect(() => {
-    getClientsList();
+    props.getClientsList();
   }, []);
 
   return (

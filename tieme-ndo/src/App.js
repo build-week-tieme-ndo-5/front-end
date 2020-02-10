@@ -24,8 +24,21 @@ function App() {
   const addClient = clients => {
     axiosWithAuth()
       .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
-      .then(response => setClientsList(response.data))
+      .then(response => {
+        getClientsList()
+      })
       .catch(error => console.log("Error >", error.response));
+      
+  };
+
+  //GET a list of Clients
+  const getClientsList = () => {
+    axiosWithAuth()
+      .get(`https://tieme-ndo-5.herokuapp.com/clients`)
+      .then(response => {
+        setClientsList(response.data);
+      })
+      .catch(error => console.log("Error >", error));
   };
 
   return (
@@ -50,6 +63,7 @@ function App() {
           exact
           path="/dashboard"
           component={Dashboard}
+          getClientsList={getClientsList}
           clientsList={clientsList}
           setClientsList={setClientsList}
         />
