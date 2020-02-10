@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { axiosWithAuth } from "../Utilities/axiosWithAuth";
+import React, { useContext } from "react";
 import {useHistory} from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import {useFormInput} from '../Hooks/hooks.js'
+import { ClientContext } from '../contexts/ClientContext';
 
 const newClient = {
   name: "", // string - required
@@ -16,8 +16,10 @@ const newClient = {
   sales_goal: "" // integer - optional
 };
 
-const ClientAdd = props => {
-  const {clientsList, setClientsList, addClient} = props;
+const ClientAdd = () => {
+  const {clientsList, setClientsList, addClient} = useContext(ClientContext);
+
+  // const {clientsList, setClientsList, addClient} = props;
 
   const history = useHistory();
 
@@ -46,22 +48,10 @@ const ClientAdd = props => {
     sales_goal: parseInt(sales_goal.value)
   }
 
-//   const [createClient, setCreateClient] = useState(newClient);
-//     console.log(createClient)
-    
-//   const handleChange = event => {
-//     setCreateClient({
-//       ...createClient,
-//       [event.target.name]: event.target.value
-//     });
-//   };
-
   const handleSubmit = event => {
     event.preventDefault();
     const clientToBeAdded = newClient
     addClient(clientToBeAdded);
-    // const newList = [...clientsList, clientToBeAdded];
-    // setClientsList(newList);
     history.push('/dashboard');
   };
 

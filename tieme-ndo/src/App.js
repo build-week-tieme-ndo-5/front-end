@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import {axiosWithAuth} from "./Utilities/axiosWithAuth";
+import {ClientContext} from './contexts/ClientContext';
 
 import {
   BrowserRouter as Router,
@@ -42,53 +43,55 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <nav>
-        <ul>
-          {/* <SignIn /> */}
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
-        </ul>
-      </nav>
-      <Switch>
-        <Route path="/login" component={Login} />
-        <PrivateRoute
-          exact
-          path="/dashboard"
-          component={Dashboard}
-          getClientsList={getClientsList}
-          clientsList={clientsList}
-          setClientsList={setClientsList}
-        />
-        <PrivateRoute 
-          component={ClientList}
-          path="/dashboard/client-list"  
-          setClientsList={setClientsList}
-          clientsList={clientsList}
+    <ClientContext.Provider value={{clientsList, setClientsList, addClient}} >
+      <div className="App">
+        <nav>
+          <ul>
+            {/* <SignIn /> */}
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/login">Login</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard">Dashboard</NavLink>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <PrivateRoute
+            exact
+            path="/dashboard"
+            component={Dashboard}
+            getClientsList={getClientsList}
+            clientsList={clientsList}
+            setClientsList={setClientsList}
           />
-        <PrivateRoute 
-          component={ClientInfo} 
-          path="/client-list/:id"  
-          clientsList={clientsList}
-          setClientsList={setClientsList}
-        />
-        <PrivateRoute
-          component={ClientAdd}
-          path="/dashboard/client-add"
-          addClient={addClient}
-          setClientsList={setClientsList}
-          clientsList={clientsList}
-        />
-        <Route exact path="/" />
-      </Switch>
-    </div>
+          <PrivateRoute 
+            component={ClientList}
+            path="/dashboard/client-list"  
+            setClientsList={setClientsList}
+            clientsList={clientsList}
+            />
+          <PrivateRoute 
+            component={ClientInfo} 
+            path="/client-list/:id"  
+            clientsList={clientsList}
+            setClientsList={setClientsList}
+          />
+          <PrivateRoute
+            component={ClientAdd}
+            path="/dashboard/client-add"
+            // addClient={addClient}
+            // setClientsList={setClientsList}
+            // clientsList={clientsList}
+          />
+          <Route exact path="/" />
+        </Switch>
+      </div>
+    </ClientContext.Provider>
   );
 }
 

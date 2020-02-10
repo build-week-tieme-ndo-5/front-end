@@ -4,11 +4,6 @@ import {axiosWithAuth} from '../Utilities/axiosWithAuth';
 import {useFormInput} from '../Hooks/hooks.js'
 import { Button } from '@material-ui/core';
 
-// const [editing, setEditing] = useState(false);
-// const [clientToEdit, setClientToEdit] = useState(null);
-
-// editClient === .PUT request @ https://tieme-ndo-5.herokuapp.com/clients/${id}/update`
-
 const ClientInfo = ({clientsList, setClientsList }) => {
 	const [ client, setClient ] = useState([]);
 	const { id } = useParams();
