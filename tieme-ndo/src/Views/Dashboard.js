@@ -33,7 +33,7 @@ const Dashboard = props => {
         <th>Edit Client</th>
         <th>Delete</th>
       </tr>
-      {clientsList.map(client => {
+      {clientsList.sort((a,b) => a.name.localeCompare(b.name)).map(client => {
         return <ClientList key={client.id} client={client} deleteFunction={deleteFunction} />;
       })}
       </table>
