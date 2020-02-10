@@ -1,7 +1,7 @@
 import { FETCH_CLIENTS_START, FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAIL } from '../actions/serverActions';
 
 const initialState = {
-    currentStaff: {
+    currentClient: {
         // key: valuePair,
         // key: valuePair
     },
