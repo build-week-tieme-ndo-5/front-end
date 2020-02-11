@@ -13,12 +13,35 @@ import PrivateRoute from "./Utilities/loginProtectedRoute";
 import Login from "./Views/Login"; //not importing?
 import Dashboard from './Views/Dashboard';
 import ClientList from './Views/ClientList'; // Samuel
-// import ClientAdd from './Views/ClientAdd'; // Samuel
+import ClientAdd from './Views/ClientAdd'; // Samuel
 import ClientInfo from './Views/ClientInfo'; // Samuel
 import NavigationBar from './Components/NavigationBar';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 function App() {
+
+     const [clientsList, setClientsList] = useState([]);
+
+  //to ClientAdd passed as props
+  const addClient = clients => {
+    axiosWithAuth()
+      .post(`https://tieme-ndo-5.herokuapp.com/clients/register`, clients)
+      .then(response => {
+        getClientsList()
+      })
+      .catch(error => console.log("Error >", error.response));
+      
+  };
+
+  //GET a list of Clients
+  const getClientsList = () => {
+    axiosWithAuth()
+      .get(`https://tieme-ndo-5.herokuapp.com/clients`)
+      .then(response => {
+        setClientsList(response.data);
+      })
+      .catch(error => console.log("Error >", error));
+  };
   const theme = createMuiTheme({palette:{
     common:{
         black:"#000",
@@ -48,19 +71,41 @@ function App() {
         hint:"rgba(0, 0, 0, 0.38)"}}});
   return (
     <Router>
-      <div className="App">
-        <nav>
-          <NavigationBar />
-        </nav>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path="dashboard/client-list" component={ClientList} />
-          <PrivateRoute path="dashboard/client-edit" component={ClientInfo} />
-          {/* <PrivateRoute path="dashboard/client-add" component={ClientAdd} /> */}
-          <Route exact path="/" />
-        </Switch>
-      </div>
+         <div className="App">
+         <NavigationBar/>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <PrivateRoute
+          exact
+          path="/dashboard"
+          component={Dashboard}
+          getClientsList={getClientsList}
+          clientsList={clientsList}
+          setClientsList={setClientsList}
+        />
+        <PrivateRoute 
+          component={ClientList}
+          path="/dashboard/client-list"  
+          setClientsList={setClientsList}
+          clientsList={clientsList}
+          />
+        <PrivateRoute 
+          component={ClientInfo} 
+          path="/client-list/:id"  
+          clientsList={clientsList}
+          setClientsList={setClientsList}
+        />
+        <PrivateRoute
+          component={ClientAdd}
+          path="/dashboard/client-add"
+          addClient={addClient}
+          setClientsList={setClientsList}
+          clientsList={clientsList}
+        />
+        <Route exact path="/" />
+      </Switch>
+    </div>
+
     </Router>
   );
 }
