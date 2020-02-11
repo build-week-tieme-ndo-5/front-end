@@ -11,14 +11,16 @@ import {
 
 import PrivateRoute from "./Utilities/loginProtectedRoute";
 import Login from "./Views/Login"; //not importing?
-import Dashboard from "./Views/Dashboard";
-import ClientList from "./Views/ClientList"; // Samuel
-import ClientAdd from "./Views/ClientAdd"; // Samuel
-import ClientInfo from "./Views/ClientInfo"; // Samuel
+import Dashboard from './Views/Dashboard';
+import ClientList from './Views/ClientList'; // Samuel
+import ClientAdd from './Views/ClientAdd'; // Samuel
+import ClientInfo from './Views/ClientInfo'; // Samuel
+import NavigationBar from './Components/NavigationBar';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 function App() {
-  //to ClientAdd passed as props
-  const [clientsList, setClientsList] = useState([]);
+
+     const [clientsList, setClientsList] = useState([]);
 
   //to ClientAdd passed as props
   const addClient = clients => {
@@ -40,23 +42,37 @@ function App() {
       })
       .catch(error => console.log("Error >", error));
   };
-
+  const theme = createMuiTheme({palette:{
+    common:{
+        black:"#000",
+        white:"#fff"},
+    background:{
+        paper:"rgba(210, 152, 106, 1)",
+        default:"rgba(206, 208, 158, 1)"},
+    primary:{
+        light:"rgba(112, 137, 120, 1)",
+        main:"rgba(47, 59, 51, 1)",
+        dark:"rgba(21, 53, 32, 1)",
+        contrastText:"#fff"},
+    secondary:{
+        light:"rgba(235, 198, 157, 1)",
+        main:"rgba(223, 165, 98, 1)",
+        dark:"rgba(194, 145, 89, 1)",
+        contrastText:"rgba(0, 0, 0, 1)"},
+    error:{
+        light:"#e57373",
+        main:"#f44336",
+        dark:"#d32f2f",
+        contrastText:"#fff"},
+    text:{
+        primary:"rgba(0, 0, 0, 0.87)",
+        secondary:"rgba(0, 0, 0, 0.54)",
+        disabled:"rgba(0, 0, 0, 0.38)",
+        hint:"rgba(0, 0, 0, 0.38)"}}});
   return (
-    <div className="App">
-      <nav>
-        <ul>
-          {/* <SignIn /> */}
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
-        </ul>
-      </nav>
+    <Router>
+         <div className="App">
+         <NavigationBar/>
       <Switch>
         <Route path="/login" component={Login} />
         <PrivateRoute
@@ -89,6 +105,8 @@ function App() {
         <Route exact path="/" />
       </Switch>
     </div>
+
+    </Router>
   );
 }
 
